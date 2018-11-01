@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   
+  
+  devise_for :users
+  resources :users
   root to: 'static_pages#coucou'
   resources :static_pages
   resources :gossips

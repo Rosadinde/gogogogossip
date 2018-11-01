@@ -25,6 +25,7 @@ class GossipsController < ApplicationController
   # POST /gossips.json
   def create
     @gossip = Gossip.new(gossip_params)
+    @gossip.user_id = current_user.id
 
     respond_to do |format|
       if @gossip.save
@@ -35,6 +36,7 @@ class GossipsController < ApplicationController
         format.json { render json: @gossip.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   # PATCH/PUT /gossips/1
@@ -69,6 +71,6 @@ class GossipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gossip_params
-      params.require(:gossip).permit(:user, :content)
+      params.require(:gossip).permit(:user, :content, :user_id)
     end
 end
